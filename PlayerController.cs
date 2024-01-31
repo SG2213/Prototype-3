@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 0.0f;
-
+    private float speed = 0.0f;
     private float jumpForce = 10.0f;
-    public float gravMod;
-    public bool onGround = false;
+    private float gravMod = 1.0f;
 
     private Rigidbody PlayerRb;
+
+    public bool onGround = false;
+    public bool gameOver = false;
+    public bool gameEnd = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,10 @@ public class PlayerController : MonoBehaviour
 
         Physics.gravity *= gravMod;
 
+        if (gameOver == true)
+        {
+            Debug.Log("You poor fool! You were supposed to avoid the painful obstacles!");
+        } 
     }
 
     // Update is called once per frame
@@ -26,7 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.Translate(Vector3.forward*Time.deltaTime*speed);
 
-        if (Input.GetKeyUp(KeyCode.Space) && onGround == true)
+        if (Input.GetKeyDown(KeyCode.Space) && onGround == true)
         {
             PlayerRb.AddForce(Vector3.up*jumpForce, ForceMode.Impulse);
             onGround = false;
@@ -36,7 +42,15 @@ public class PlayerController : MonoBehaviour
     // Collision Triggers
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
         onGround = true;
+        }
+       
+        else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            gameOver = true;
+        }
     }
 
 }

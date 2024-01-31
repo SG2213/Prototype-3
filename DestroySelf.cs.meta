@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 9dc02f2b7cab83c4fb59cca120817894
+guid: 3b7ee00194b9fba47803d6a2b5c834a6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - ObsPF: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

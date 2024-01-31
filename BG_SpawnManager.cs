@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class BG_SpawnManager : MonoBehaviour
 {
-    public GameObject[] ObsPre;
+    public GameObject BG;
 
-    private float StartDelay = 1.5f;
-    private float RepeatRate = 3.2f;
-    private bool SpawnObs = true;
+    private float StartDelay = 0.0f;
+    private float RepeatRate = 24.75f;
+    private bool SpawningBG = true;
 
     private Vector3 SpawnPos;
-    public PlayerController PlayerControllerScript;
+    private PlayerController PlayerControllerScript;
 
     // Start is called before the first frame update
     void Start()
     {
         PlayerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
-        
-        InvokeRepeating("SpawnObstacle", StartDelay, RepeatRate);
+       
+        InvokeRepeating("SpawnBG", StartDelay, RepeatRate);
     }
 
     // Update is called once per frame
@@ -26,17 +26,17 @@ public class SpawnManager : MonoBehaviour
     {
         if (PlayerControllerScript.gameOver == true)
         {
-            SpawnObs = false;
+            SpawningBG = false;
         }
     }
 
-    void SpawnObstacle ()
+    void SpawnBG()
     {
         SpawnPos = transform.position;
 
-        if (SpawnObs == true)
+        if (SpawningBG == true)
         {
-            Instantiate(ObsPre[0], SpawnPos, ObsPre[0].transform.rotation);
+            Instantiate(BG, SpawnPos, BG.transform.rotation);
         }
     }
 }
